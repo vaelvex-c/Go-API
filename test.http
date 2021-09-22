@@ -1,0 +1,39 @@
+### GET ALL CATEGORIES
+GET http://localhost:8080/api/categories
+X-API-Key: SECRET
+Accept: application/json
+
+### CREATE NEW CATEGORY
+POST http://localhost:8080/api/categories
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : ""
+}
+
+### GET CATEGORY BY ID
+GET http://localhost:8080/api/categories/10
+Accept: application/json
+
+### UPDATE CATEGORY BY ID
+PUT http://localhost:8080/api/categories/10
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "Apple"
+}
+
+### UPDATE CATEGORY BY ID WITHOUT PARAMS TO CHECK VALIDATION
+PUT http://localhost:8080/api/categories/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : ""
+}
+
+### DELETE CATEGORY BY ID
+DELETE http://localhost:8080/api/categories/2
+Accept: application/json

@@ -1,12 +1,12 @@
 package app
 
 import (
-	"github.com/chwlr/golang-api/controller"
-	"github.com/chwlr/golang-api/exception"
 	"github.com/julienschmidt/httprouter"
+	"github.com/vaelvex/Go-API/controller"
+	"github.com/vaelvex/Go-API/exception"
 )
 
-func NewRouter(categoryController controller.CategoryController, userController controller.UserController) *httprouter.Router{
+func NewRouter(categoryController controller.CategoryController, userController controller.UserController) *httprouter.Router {
 	router := httprouter.New()
 
 	router.GET("/api/categories", categoryController.FindAll)

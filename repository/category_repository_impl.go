@@ -4,18 +4,17 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/domain"
+
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/domain"
 )
 
 type CategoryRepositoryImpl struct {
-
 }
 
 func NewCategoryRepository() CategoryRepository {
 	return &CategoryRepositoryImpl{}
 }
-
 
 func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
 	SQL := "insert into category(name) values(?)"
@@ -49,11 +48,11 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.
 	defer rows.Close()
 
 	category := domain.Category{}
-	if rows.Next(){
+	if rows.Next() {
 		err := rows.Scan(&category.Id, &category.Name)
 		helper.PanicIfError(err)
 		return category, nil
-	}else {
+	} else {
 		return category, errors.New("category not found")
 	}
 

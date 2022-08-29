@@ -3,7 +3,8 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"github.com/chwlr/golang-api/model/domain"
+
+	"github.com/vaelvex/Go-API/model/domain"
 )
 
 type CategoryRepository interface {

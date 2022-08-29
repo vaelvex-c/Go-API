@@ -2,8 +2,9 @@ package app
 
 import (
 	"database/sql"
-	"github.com/chwlr/golang-api/helper"
 	"time"
+
+	"github.com/vaelvex/Go-API/helper"
 )
 
 func NewDB() *sql.DB {

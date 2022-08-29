@@ -2,7 +2,8 @@ package service
 
 import (
 	"context"
-	"github.com/chwlr/golang-api/model/web"
+
+	"github.com/vaelvex/Go-API/model/web"
 )
 
 type CategoryService interface {

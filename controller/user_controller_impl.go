@@ -1,12 +1,13 @@
 package controller
 
 import (
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/web"
-	"github.com/chwlr/golang-api/service"
-	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"strconv"
+
+	"github.com/julienschmidt/httprouter"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/web"
+	"github.com/vaelvex/Go-API/service"
 )
 
 type UserControllerImpl struct {
@@ -27,9 +28,9 @@ func (controller *UserControllerImpl) Create(writer http.ResponseWriter, request
 	)
 
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: userResponse,
+		Data:   userResponse,
 	}
 	helper.WriteToResponseBody(writer, webResponse)
 }
@@ -46,9 +47,9 @@ func (controller *UserControllerImpl) Update(writer http.ResponseWriter, request
 
 	userResponse := controller.UserService.Update(request.Context(), userUpdateRequest)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: userResponse,
+		Data:   userResponse,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -59,7 +60,7 @@ func (controller *UserControllerImpl) Delete(writer http.ResponseWriter, request
 	id, err := strconv.Atoi(userId)
 	controller.UserService.Delete(request.Context(), id)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
 	}
 	helper.PanicIfError(err)
@@ -71,9 +72,9 @@ func (controller *UserControllerImpl) FindById(writer http.ResponseWriter, reque
 	id, err := strconv.Atoi(userId)
 	userResponse := controller.UserService.FindById(request.Context(), id)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: userResponse,
+		Data:   userResponse,
 	}
 	helper.PanicIfError(err)
 	helper.WriteToResponseBody(writer, webResponse)
@@ -82,9 +83,9 @@ func (controller *UserControllerImpl) FindById(writer http.ResponseWriter, reque
 func (controller *UserControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, param httprouter.Params) {
 	userResponses := controller.UserService.FindAll(request.Context())
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: userResponses,
+		Data:   userResponses,
 	}
 	helper.WriteToResponseBody(writer, webResponse)
 }

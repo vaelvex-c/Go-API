@@ -4,13 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/domain"
 	"time"
+
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/domain"
 )
 
 type UserRepositoryImpl struct {
-
 }
 
 func NewUserRepository() UserRepository {
@@ -56,7 +56,7 @@ func (repository *UserRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, us
 	helper.PanicIfError(err)
 }
 
-func (repository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, userId int) (domain.User, error ){
+func (repository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, userId int) (domain.User, error) {
 	SQL := "select id, id_role, name, email from user where id = ?"
 	rows, err := tx.QueryContext(ctx, SQL, userId)
 	helper.PanicIfError(err)
@@ -64,11 +64,11 @@ func (repository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, 
 	defer rows.Close()
 
 	user := domain.User{}
-	if rows.Next(){
+	if rows.Next() {
 		err := rows.Scan(&user.Id, &user.IdRole, &user.Name, &user.Email)
 		helper.PanicIfError(err)
 		return user, nil
-	}else {
+	} else {
 		return user, errors.New("user no found")
 	}
 }
@@ -83,10 +83,9 @@ func (repository *UserRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) [
 	var users []domain.User
 	for rows.Next() {
 		user := domain.User{}
-		err  := rows.Scan(&user.Id, &user.IdRole, &user.Name, &user.Email)
+		err := rows.Scan(&user.Id, &user.IdRole, &user.Name, &user.Email)
 		helper.PanicIfError(err)
 		users = append(users, user)
 	}
 	return users
 }
-

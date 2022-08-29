@@ -3,25 +3,24 @@ package service
 import (
 	"context"
 	"database/sql"
-	"github.com/chwlr/golang-api/exception"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/domain"
-	"github.com/chwlr/golang-api/model/web"
-	"github.com/chwlr/golang-api/repository"
+
 	"github.com/go-playground/validator/v10"
+	"github.com/vaelvex/Go-API/exception"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/domain"
+	"github.com/vaelvex/Go-API/model/web"
+	"github.com/vaelvex/Go-API/repository"
 )
 
 type CategoryServiceImpl struct {
 	CategoryRepository repository.CategoryRepository
-	DB *sql.DB
-	Validate *validator.Validate
+	DB                 *sql.DB
+	Validate           *validator.Validate
 }
 
 func NewCategoryService(categoryRepository repository.CategoryRepository, DB *sql.DB, validate *validator.Validate) CategoryService {
 	return &CategoryServiceImpl{CategoryRepository: categoryRepository, DB: DB, Validate: validate}
 }
-
-
 
 func (service *CategoryServiceImpl) Create(ctx context.Context, request web.CategoryCreateRequest) web.CategoryResponse {
 	//validation

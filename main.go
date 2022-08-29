@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/chwlr/golang-api/app"
-	"github.com/chwlr/golang-api/controller"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/middleware"
-	"github.com/chwlr/golang-api/repository"
-	"github.com/chwlr/golang-api/service"
+	"net/http"
+
 	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
-	"net/http"
+	"github.com/vaelvex/Go-API/app"
+	"github.com/vaelvex/Go-API/controller"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/middleware"
+	"github.com/vaelvex/Go-API/repository"
+	"github.com/vaelvex/Go-API/service"
 )
 
 func main() {
@@ -28,7 +29,7 @@ func main() {
 	router := app.NewRouter(categoryController, userController)
 
 	server := http.Server{
-		Addr: "localhost:8080",
+		Addr:    "localhost:8080",
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 	err := server.ListenAndServe()

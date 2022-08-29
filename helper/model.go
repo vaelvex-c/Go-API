@@ -1,14 +1,14 @@
 package helper
 
 import (
-	"github.com/chwlr/golang-api/model/domain"
-	"github.com/chwlr/golang-api/model/web"
+	"github.com/vaelvex/Go-API/model/domain"
+	"github.com/vaelvex/Go-API/model/web"
 )
 
 func ToCategoryResponse(category domain.Category) web.CategoryResponse {
 	return web.CategoryResponse{
-		Id: 	category.Id,
-		Name: 	category.Name,
+		Id:   category.Id,
+		Name: category.Name,
 	}
 }
 
@@ -22,10 +22,10 @@ func ToCategoryResponses(categories []domain.Category) []web.CategoryResponse {
 
 func ToUserResponse(user domain.User) web.UserResponse {
 	return web.UserResponse{
-		Id: user.Id,
+		Id:     user.Id,
 		IdRole: user.IdRole,
-		Name: user.Name,
-		Email: user.Email,
+		Name:   user.Name,
+		Email:  user.Email,
 	}
 }
 

@@ -1,12 +1,13 @@
 package controller
 
 import (
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/web"
-	"github.com/chwlr/golang-api/service"
-	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"strconv"
+
+	"github.com/julienschmidt/httprouter"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/web"
+	"github.com/vaelvex/Go-API/service"
 )
 
 type CategoryControllerImpl struct {
@@ -20,17 +21,17 @@ func NewCategoryController(categoryService service.CategoryService) CategoryCont
 }
 
 func (controller *CategoryControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	 categoryCreateRequest := web.CategoryCreateRequest{}
-	 helper.ReadFromRequestBody(request, &categoryCreateRequest)
+	categoryCreateRequest := web.CategoryCreateRequest{}
+	helper.ReadFromRequestBody(request, &categoryCreateRequest)
 
-	 categoryResponse := controller.CategoryService.Create(request.Context(), categoryCreateRequest)
-	 webResponse := web.WebResponse{
-		 Code: 200,
-		 Status: "OK",
-		 Data: categoryResponse,
-	 }
+	categoryResponse := controller.CategoryService.Create(request.Context(), categoryCreateRequest)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   categoryResponse,
+	}
 
-	 helper.WriteToResponseBody(writer, webResponse)
+	helper.WriteToResponseBody(writer, webResponse)
 
 }
 
@@ -46,9 +47,9 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 
 	categoryResponse := controller.CategoryService.Update(request.Context(), categoryUpdateRequest)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: categoryResponse,
+		Data:   categoryResponse,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -59,10 +60,9 @@ func (controller *CategoryControllerImpl) Delete(writer http.ResponseWriter, req
 	id, err := strconv.Atoi(categoryId)
 	helper.PanicIfError(err)
 
-
 	controller.CategoryService.Delete(request.Context(), id)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
 	}
 
@@ -74,12 +74,11 @@ func (controller *CategoryControllerImpl) FindById(writer http.ResponseWriter, r
 	id, err := strconv.Atoi(categoryId)
 	helper.PanicIfError(err)
 
-
 	categoryResponse := controller.CategoryService.FindById(request.Context(), id)
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: categoryResponse,
+		Data:   categoryResponse,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -88,9 +87,9 @@ func (controller *CategoryControllerImpl) FindById(writer http.ResponseWriter, r
 func (controller *CategoryControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	categoryResponses := controller.CategoryService.FindAll(request.Context())
 	webResponse := web.WebResponse{
-		Code: 200,
+		Code:   200,
 		Status: "OK",
-		Data: categoryResponses,
+		Data:   categoryResponses,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)

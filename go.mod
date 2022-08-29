@@ -1,4 +1,4 @@
-module github.com/chwlr/golang-api
+module github.com/vaelvex/Go-API
 
 go 1.16
 

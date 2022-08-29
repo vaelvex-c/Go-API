@@ -3,25 +3,26 @@ package service
 import (
 	"context"
 	"database/sql"
-	"github.com/chwlr/golang-api/exception"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/domain"
-	"github.com/chwlr/golang-api/model/web"
-	"github.com/chwlr/golang-api/repository"
+
 	"github.com/go-playground/validator/v10"
+	"github.com/vaelvex/Go-API/exception"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/domain"
+	"github.com/vaelvex/Go-API/model/web"
+	"github.com/vaelvex/Go-API/repository"
 )
 
 type UserServiceImpl struct {
 	UserRepository repository.UserRepository
-	DB *sql.DB
-	Validate *validator.Validate
+	DB             *sql.DB
+	Validate       *validator.Validate
 }
 
 func NewUserService(userRepository repository.UserRepository, DB *sql.DB, validate *validator.Validate) UserService {
 	return &UserServiceImpl{
 		UserRepository: userRepository,
-		DB: DB,
-		Validate: validate,
+		DB:             DB,
+		Validate:       validate,
 	}
 }
 
@@ -108,4 +109,3 @@ func (service *UserServiceImpl) FindAll(ctx context.Context) []web.UserResponse 
 	users := service.UserRepository.FindAll(ctx, tx)
 	return helper.ToUserResponses(users)
 }
-

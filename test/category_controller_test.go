@@ -2,20 +2,21 @@ package test
 
 import (
 	"database/sql"
-	"github.com/chwlr/golang-api/app"
-	"github.com/chwlr/golang-api/controller"
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/middleware"
-	"github.com/chwlr/golang-api/repository"
-	"github.com/chwlr/golang-api/service"
-	"github.com/go-playground/validator/v10"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/go-playground/validator/v10"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/stretchr/testify/assert"
+	"github.com/vaelvex/Go-API/app"
+	"github.com/vaelvex/Go-API/controller"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/middleware"
+	"github.com/vaelvex/Go-API/repository"
+	"github.com/vaelvex/Go-API/service"
 )
 
 func setupTestDB() *sql.DB {
@@ -30,7 +31,7 @@ func setupTestDB() *sql.DB {
 	return db
 }
 
-func setupRouter() http.Handler{
+func setupRouter() http.Handler {
 	db := setupTestDB()
 	validate := validator.New()
 
@@ -58,7 +59,6 @@ func TestCreateCategorySuccess(t *testing.T) {
 
 }
 func TestCreateCategoryFailed(t *testing.T) {
-
 
 }
 func TestUpdateCategorySuccess(t *testing.T) {

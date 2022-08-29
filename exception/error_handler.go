@@ -1,26 +1,27 @@
 package exception
 
 import (
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/web"
-	"github.com/go-playground/validator/v10"
 	"net/http"
+
+	"github.com/go-playground/validator/v10"
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/web"
 )
 
-func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}){
+func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
 
-	if notFoundError (writer, request, err) {
+	if notFoundError(writer, request, err) {
 		return
 	}
 
-	if validationError (writer, request, err) {
+	if validationError(writer, request, err) {
 		return
 	}
 
 	internalServerError(writer, request, err)
 }
 
-func validationError(writer http.ResponseWriter, request *http.Request, err interface{}) bool{
+func validationError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
 	exception, ok := err.(validator.ValidationErrors)
 	if ok {
 		writer.Header().Set("Content-type", "application/json")
@@ -39,7 +40,7 @@ func validationError(writer http.ResponseWriter, request *http.Request, err inte
 	}
 }
 
-func notFoundError(writer http.ResponseWriter, request *http.Request, err interface{}) bool{
+func notFoundError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
 	exception, ok := err.(NotFoundError)
 	if ok {
 		writer.Header().Set("Content-type", "application/json")

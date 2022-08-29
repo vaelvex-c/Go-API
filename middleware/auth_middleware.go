@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"github.com/chwlr/golang-api/helper"
-	"github.com/chwlr/golang-api/model/web"
 	"net/http"
+
+	"github.com/vaelvex/Go-API/helper"
+	"github.com/vaelvex/Go-API/model/web"
 )
 
 type AuthMiddleware struct {
@@ -15,9 +16,9 @@ func NewAuthMiddleware(handler http.Handler) *AuthMiddleware {
 }
 
 func (middleware AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
-	if "SECRET" == request.Header.Get("X-API-Key"){
+	if "SECRET" == request.Header.Get("X-API-Key") {
 		middleware.Handler.ServeHTTP(writer, request)
-	}else {
+	} else {
 		writer.Header().Set("Content-type", "application/json")
 		writer.WriteHeader(http.StatusUnauthorized)
 

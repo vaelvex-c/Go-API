@@ -6,7 +6,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewRouter(categoryController controller.CategoryController) *httprouter.Router{
+func NewRouter(categoryController controller.CategoryController, userController controller.UserController) *httprouter.Router{
 	router := httprouter.New()
 
 	router.GET("/api/categories", categoryController.FindAll)

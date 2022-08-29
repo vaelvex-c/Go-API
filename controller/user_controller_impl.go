@@ -13,6 +13,10 @@ type UserControllerImpl struct {
 	UserService service.UserService
 }
 
+func NewUserController(userService service.UserService) UserController {
+	return &UserControllerImpl{UserService: userService}
+}
+
 func (controller *UserControllerImpl) Create(writer http.ResponseWriter, request *http.Request, param httprouter.Params) {
 	userCreateRequest := web.UserCreateRequest{}
 	helper.ReadFromRequestBody(request, &userCreateRequest)

@@ -13,6 +13,10 @@ type UserRepositoryImpl struct {
 
 }
 
+func NewUserRepository() UserRepository {
+	return &UserRepositoryImpl{}
+}
+
 func (repository *UserRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, user domain.User) domain.User {
 	SQL := "insert into user(id_role, name, email, password, created_at) values(?)"
 	result, err := tx.ExecContext(

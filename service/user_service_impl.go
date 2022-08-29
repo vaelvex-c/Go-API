@@ -17,6 +17,14 @@ type UserServiceImpl struct {
 	Validate *validator.Validate
 }
 
+func NewUserService(userRepository repository.UserRepository, DB *sql.DB, validate *validator.Validate) UserService {
+	return &UserServiceImpl{
+		UserRepository: userRepository,
+		DB: DB,
+		Validate: validate,
+	}
+}
+
 func (service *UserServiceImpl) Create(ctx context.Context, request web.UserCreateRequest) web.UserResponse {
 	//validation
 	err := service.Validate.Struct(request)
